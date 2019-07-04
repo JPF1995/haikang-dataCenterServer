@@ -1,0 +1,34 @@
+<?xml version='1.0'?>
+
+<coherence xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://xmlns.oracle.com/coherence/coherence-operational-config"
+	xsi:schemaLocation="http://xmlns.oracle.com/coherence/coherence-operational-config coherence-operational-config.xsd">
+	<cluster-config>
+		<member-identity>
+			<!-- Note: All members of the cluster must specify the same cluster name 
+				in order to be allowed to join the cluster. -->
+
+			<cluster-name system-property="tangosol.coherence.cluster">vms_coherence_sys</cluster-name>
+			<site-name system-property="tangosol.coherence.site"></site-name>
+			<rack-name system-property="tangosol.coherence.rack"></rack-name>
+			<machine-name system-property="tangosol.coherence.machine"></machine-name>
+			<process-name system-property="tangosol.coherence.process"></process-name>
+			<member-name system-property="tangosol.coherence.member"></member-name>
+			<role-name system-property="tangosol.coherence.role"></role-name>
+			<priority system-property="tangosol.coherence.priority"></priority>
+		</member-identity>
+
+		<unicast-listener>
+			<well-known-addresses>
+				<socket-address id="1">
+					<address>127.0.0.1</address>
+					<port>8888</port>
+				</socket-address>
+			</well-known-addresses>
+			<address system-property="tangosol.coherence.localhost">127.0.0.1</address>
+			<port system-property="tangosol.coherence.localport">8888</port>
+			<port-auto-adjust system-property="tangosol.coherence.loc
+		tyyalport.adjust">false</port-auto-adjust>
+		</unicast-listener>
+	</cluster-config>
+</coherence>

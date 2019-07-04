@@ -1,0 +1,13 @@
+spring:
+  application:
+      name: haikang-dataCenterServer
+  profiles:
+      # dev 为开发环境  pro为正式环境  test为测试环境
+    active: dev
+
+
+
+
+
+
+
