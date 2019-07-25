@@ -43,8 +43,7 @@ public class CommandIssuedListener implements BusListener {
 
         DCommandInfo cmdInfo = (DCommandInfo) command.getResult();
         long seqId = cmdInfo.getSeqID();
-        int messageID = BaseInfoHandler.getInstance().getMessageID(seqId);
-        Command message = handler.prepareHKCommand(cmdInfo, sim, messageID);
+        Command message = handler.prepareHKCommand(cmdInfo, sim, seqId);
         if (message!=null) {
             BaseInfoHandler.getInstance().putCommand((CommandMessage) message.getResult());
             logger.debug("Push to kafka:topic(" + message.getSource() + "),sim(" + sim + "),value(" + message.toString() + ")");

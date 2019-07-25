@@ -102,40 +102,33 @@ public class PlatformMessageHandler {
         String driverIdNow = event.getDriverID();
         String fid = event.getPhotoID();
         int result;
-//        if (DeviceTypeConstant.ILLEGAL_DRIVER_ID.equals(driverIdNow)) {
-//            if (!driverIdLast.equals(driverIdNow)) {
-//                result = fastDFSCHandler.insertDriverChange(vehicleId, driverIdNow, 0, fid);
-//                if (result > 0) {
-//                    logger.debug("司机上车情况插入成功！");
-//                }
-//                if (!DeviceTypeConstant.NO_DRIVER_ID.equals(driverIdLast)){
-//                    result = fastDFSCHandler.insertDriverChange(vehicleId, driverIdLast, 1, fid);
-//                    if (result > 0) {
-//                        logger.debug("司机下车情况插入成功！");
-//                    }
-//                }
-//            }
-//        }else
-        if (DeviceTypeConstant.NO_DRIVER_ID.equals(driverIdNow)) {
-            if (!driverIdLast.equals(driverIdNow)) {
-                result = fastDFSCHandler.insertDriverChange(vehicleId, driverIdLast, 1, fid);
-                if (result > 0) {
-                    logger.debug("司机下车情况插入成功！");
-                }
+        if (driverIdLast==null){
+            result = fastDFSCHandler.insertDriverChange(vehicleId, driverIdNow, 0, fid);
+            if (result > 0) {
+                logger.info(driverIdNow+"司机上车:"+vehicleId);
             }
-        } else {
-            if (!driverIdLast.equals(driverIdNow)) {
-                result = fastDFSCHandler.insertDriverChange(vehicleId, driverIdNow, 0, fid);
-                if (result > 0) {
-                    logger.debug("司机上车情况插入成功！");
-                }
-                if (!DeviceTypeConstant.NO_DRIVER_ID.equals(driverIdLast)&&!"".equals(driverIdLast)) {
+        }else {
+            if (DeviceTypeConstant.NO_DRIVER_ID.equals(driverIdNow)) {
+                if (!driverIdLast.equals(driverIdNow)) {
                     result = fastDFSCHandler.insertDriverChange(vehicleId, driverIdLast, 1, fid);
                     if (result > 0) {
-                        logger.debug("司机下车情况插入成功！");
+                        logger.info(driverIdLast+"司机下车:"+vehicleId);
                     }
                 }
+            } else {
+                if (!driverIdLast.equals(driverIdNow)) {
+                    result = fastDFSCHandler.insertDriverChange(vehicleId, driverIdNow, 0, fid);
+                    if (result > 0) {
+                        logger.info(driverIdNow+"司机上车:"+vehicleId);
+                    }
+                    if (!DeviceTypeConstant.NO_DRIVER_ID.equals(driverIdLast) && !"".equals(driverIdLast)) {
+                        result = fastDFSCHandler.insertDriverChange(vehicleId, driverIdLast, 1, fid);
+                        if (result > 0) {
+                            logger.info(driverIdNow+"司机下车:"+vehicleId);
+                        }
+                    }
 
+                }
             }
         }
     }

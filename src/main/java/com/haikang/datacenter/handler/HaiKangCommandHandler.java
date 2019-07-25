@@ -53,40 +53,45 @@ public class HaiKangCommandHandler {
 
     private SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmssSSS");
 
-    public Command prepareHKCommand(DCommandInfo cmdInfo, String sim, int messageID) {
+    public Command prepareHKCommand(DCommandInfo cmdInfo, String sim, long seqId) {
 
         String topic = new String();
         CommandMessage message;
         int cmd = cmdInfo.getCmdID();
         String param = cmdInfo.getCmdContent();
+        int messageID;
         switch (cmd) {
             case 2002: {
                 topic = KafkaTopic.DRIVER_UPDATE_SEND;
                 String[] photoMessage = param.split(";");
+                messageID = BaseInfoHandler.getInstance().getMessageID(seqId);
                 message = factory.transformData(cmd, sim, messageID, photoMessage);
                 break;
             }
             case 2003: {
                 topic = KafkaTopic.DRIVER_DELETE_SEND;
                 String[] driverMessage = param.split(";");
+                messageID = BaseInfoHandler.getInstance().getMessageID(seqId);
                 message = factory.transformData(cmd, sim, messageID, driverMessage);
-
                 break;
             }
             case 2004: {
                 topic = KafkaTopic.DRIVER_SELECT_SEND;
                 String[] driverMessage = param.split(";");
+                messageID = BaseInfoHandler.getInstance().getMessageID(seqId);
                 message = factory.transformData(cmd, sim, messageID, driverMessage);
                 break;
             }
             case 2005: {
                 topic = KafkaTopic.DRIVER_UPLOAD_SEND;
                 String[] driverMessage = param.split(";");
+                messageID = BaseInfoHandler.getInstance().getMessageID(seqId);
                 message = factory.transformData(cmd, sim, messageID, driverMessage);
                 break;
             }
             case 2007: {
                 topic = KafkaTopic.DEVICE_ACTIVE_RECOGNITION_SEND;
+                messageID = BaseInfoHandler.getInstance().getMessageID(seqId);
                 message = factory.transformData(cmd, sim, messageID, null);
                 break;
             }
@@ -165,6 +170,7 @@ public class HaiKangCommandHandler {
             case KafkaTopic.DRIVER_SELECT_RECEIVE: {
                 if (value instanceof Message0x0004) {
                     Message0x0004 message = (Message0x0004) value;
+                    logger.info("收到指令回馈，value:"+value.toString());
                     List<String> driverIdLIst = message.getDriverIdList();
                     if (driverIdLIst.size()!=0) {
                         StringBuilder sb = new StringBuilder();

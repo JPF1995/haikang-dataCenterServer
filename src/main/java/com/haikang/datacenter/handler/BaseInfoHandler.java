@@ -172,6 +172,7 @@ public class BaseInfoHandler {
     public long getSeqId(int messageID){
         try {
             long seqId = idCache.get(messageID);
+//            logger.info("cache size:"+idCache.size());
             return seqId;
         } catch (ExecutionException e) {
             e.printStackTrace();
