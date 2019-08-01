@@ -23,6 +23,7 @@ public class CommandFactory {
 
     /**
      * 将指令转换成协议消息体
+     *
      * @param cmd
      * @param sim
      * @param messageID

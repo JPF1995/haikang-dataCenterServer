@@ -69,6 +69,7 @@ public class BaseInfoHandler {
 
     /**
      * 写入车辆缓存信息
+     *
      * @param vehicle
      */
     public void putVehicleCache(SVehicleInfo vehicle) {
@@ -88,12 +89,13 @@ public class BaseInfoHandler {
         }
 
         vehicleCache.put(vehicle.getVehicleId(), vehicle);
-        simCache.put(vehicle.getSimNum(),vehicle);
+        simCache.put(vehicle.getSimNum(), vehicle);
 
     }
 
     /**
      * 删除车辆缓存信息
+     *
      * @param vehicle
      * @return
      */
@@ -120,6 +122,7 @@ public class BaseInfoHandler {
 
     /**
      * 获取车辆sim
+     *
      * @param vehicleIdStr
      * @return
      */
@@ -128,8 +131,8 @@ public class BaseInfoHandler {
         if (vehicleId == 0) {
             return null;
         }
-        SVehicleInfo vehicleInfo =  vehicleCache.get(vehicleId);
-        if (vehicleInfo==null){
+        SVehicleInfo vehicleInfo = vehicleCache.get(vehicleId);
+        if (vehicleInfo == null) {
             return null;
         }
         String sim = vehicleInfo.getSimNum();
@@ -138,13 +141,14 @@ public class BaseInfoHandler {
 
     /**
      * 获取车辆sim
+     *
      * @param sim
      * @return
      */
     public String getVehicleIdBySim(String sim) {
 
-        SVehicleInfo vehicleInfo =  simCache.get(sim);
-        if (vehicleInfo==null){
+        SVehicleInfo vehicleInfo = simCache.get(sim);
+        if (vehicleInfo == null) {
             return null;
         }
         int vehicleId = vehicleInfo.getVehicleId();
@@ -154,22 +158,24 @@ public class BaseInfoHandler {
 
     /**
      * 获取messageID
+     *
      * @param seqId
      * @return
      */
-    public int getMessageID(long seqId){
+    public int getMessageID(long seqId) {
         int id = messageID;
-        idCache.put(id,seqId);
+        idCache.put(id, seqId);
         messageID++;
         return id;
     }
 
     /**
      * 获取seqId
+     *
      * @param messageID
      * @return
      */
-    public long getSeqId(int messageID){
+    public long getSeqId(int messageID) {
         try {
             long seqId = idCache.get(messageID);
 //            logger.info("cache size:"+idCache.size());
@@ -182,17 +188,19 @@ public class BaseInfoHandler {
 
     /**
      * 存入命令缓存
+     *
      * @param message
      */
-    public  void putCommand(CommandMessage message){
-        commandCache.put(message.getMessageID(),message);
+    public void putCommand(CommandMessage message) {
+        commandCache.put(message.getMessageID(), message);
     }
 
     /**
      * 移除命令缓存
+     *
      * @param messageID
      */
-    public  void removeCommand(int messageID){
+    public void removeCommand(int messageID) {
         commandCache.invalidate(messageID);
     }
 
@@ -211,7 +219,7 @@ public class BaseInfoHandler {
 //        }
         Map<Object, Object> baseMap = cohDao.loadVehicle();
         for (Map.Entry<Object, Object> entry : baseMap.entrySet()) {
-            if (entry.getValue() instanceof SVehicleInfo ) {
+            if (entry.getValue() instanceof SVehicleInfo) {
                 SVehicleInfo vehicle = (SVehicleInfo) entry.getValue();
                 putVehicleCache(vehicle);
             }
@@ -219,7 +227,7 @@ public class BaseInfoHandler {
         idCache = CacheBuilder.newBuilder().maximumSize(150000).expireAfterWrite(1, TimeUnit.MINUTES)
                 .build(new CacheLoader<Integer, Long>() {
                     @Override
-                    public Long load(Integer key) throws Exception{
+                    public Long load(Integer key) throws Exception {
                         return (long) 0;
                     }
                 });
@@ -229,7 +237,7 @@ public class BaseInfoHandler {
                     // 判断是否是超时删除的，而不是被替换删除的（因为替换的数据也会被onRemoval接收到）（过期的）
                     try {
                         lock.lock();
-                        if (RemovalCause.EXPIRED==cache.getCause()) {
+                        if (RemovalCause.EXPIRED == cache.getCause()) {
                             CommandMessage message = cache.getValue();
                             logger.debug("Timer delete command :" + message.getCmd() + ":" + message.getSim() + ".");
                             DTerminalCommandResponse dtcr = new DTerminalCommandResponse();
@@ -245,8 +253,7 @@ public class BaseInfoHandler {
 
                             cohDao.putCoherence("mapCommandResponse", String.valueOf(seqId), dtcr);
 
-                        }
-                        else if (RemovalCause.EXPLICIT==cache.getCause()){
+                        } else if (RemovalCause.EXPLICIT == cache.getCause()) {
                             CommandMessage message = cache.getValue();
                             logger.debug("Timer delete command :" + message.getCmd() + ":" + message.getSim() + ".");
                         }

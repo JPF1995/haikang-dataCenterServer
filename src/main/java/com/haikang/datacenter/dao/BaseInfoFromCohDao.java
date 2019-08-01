@@ -27,6 +27,7 @@ public class BaseInfoFromCohDao {
 
     /**
      * 获取车辆静态信息
+     *
      * @return
      */
     public Map loadVehicle() {
@@ -37,16 +38,18 @@ public class BaseInfoFromCohDao {
 
     /**
      * 更新司机识别信息
+     *
      * @param vehicleId
      * @param driverId
      */
-    public void updateDriverReocgnition(String vehicleId,String driverId) {
+    public void updateDriverReocgnition(String vehicleId, String driverId) {
         CoherenceUtil coUtil = CoherenceUtil.getConnection(CoherenceTopic.DRIVER_RECOGNITION);
         coUtil.put(vehicleId, driverId);
     }
 
     /**
      * 获取司机识别信息
+     *
      * @param vehicleId
      */
     public String getDriverReocgnition(String vehicleId) {
@@ -57,7 +60,7 @@ public class BaseInfoFromCohDao {
 
     public void putCoherence(String topic, Object key, Object value) {
         CoherenceUtil coUtil = CoherenceUtil.getConnection(topic);
-        coUtil.put(key,value);
+        coUtil.put(key, value);
     }
 
     public static void main(String[] args) {

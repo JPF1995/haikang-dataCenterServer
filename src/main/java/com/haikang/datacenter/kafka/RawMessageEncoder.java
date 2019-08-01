@@ -25,9 +25,11 @@ public class RawMessageEncoder implements Serializer<Object> {
         return SerializationUtils.serialize((Serializable) obj);
     }
 
-    /** (非 Javadoc)
+    /**
+     * (非 Javadoc)
      * <p>Title: configure</p>
      * <p>Description: </p>
+     *
      * @param configs
      * @param isKey
      * @see org.apache.kafka.common.serialization.Serializer#configure(java.util.Map, boolean)
@@ -38,9 +40,11 @@ public class RawMessageEncoder implements Serializer<Object> {
 
     }
 
-    /** (非 Javadoc)
+    /**
+     * (非 Javadoc)
      * <p>Title: serialize</p>
      * <p>Description: </p>
+     *
      * @param topic
      * @param data
      * @return
@@ -52,9 +56,11 @@ public class RawMessageEncoder implements Serializer<Object> {
         return ObjectToByte(data);
     }
 
-    /** (非 Javadoc)
+    /**
+     * (非 Javadoc)
      * <p>Title: close</p>
      * <p>Description: </p>
+     *
      * @see org.apache.kafka.common.serialization.Serializer#close()
      */
     @Override

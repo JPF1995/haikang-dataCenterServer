@@ -39,7 +39,7 @@ public class HaiKangCommandHandler {
     private static CommandFactory factory = new CommandFactory();
 
     @Autowired
-    private FastDFSCHandler handler ;
+    private FastDFSCHandler handler;
 
     public FastDFSCHandler getHandler() {
         return handler;
@@ -125,11 +125,11 @@ public class HaiKangCommandHandler {
                 if (value instanceof Message0x0002) {
                     Message0x0002 message = (Message0x0002) value;
                     int result = message.getResult();
-                    if (result==0){
+                    if (result == 0) {
                         siteResponse = "添加证件照成功";
-                    }else if (result==1){
+                    } else if (result == 1) {
                         siteResponse = "覆盖证件照成功";
-                    }else {
+                    } else {
                         siteResponse = "无法添加新的证件照";
                     }
                     dtcr.setContent(siteResponse);
@@ -149,9 +149,9 @@ public class HaiKangCommandHandler {
                 if (value instanceof Message0x0003) {
                     Message0x0003 message = (Message0x0003) value;
                     int result = message.getResult();
-                    if (result==0) {
+                    if (result == 0) {
                         siteResponse = "删除司机信息成功";
-                    }else {
+                    } else {
                         siteResponse = "删除司机信息失败";
                     }
                     dtcr.setContent(siteResponse);
@@ -170,9 +170,9 @@ public class HaiKangCommandHandler {
             case KafkaTopic.DRIVER_SELECT_RECEIVE: {
                 if (value instanceof Message0x0004) {
                     Message0x0004 message = (Message0x0004) value;
-                    logger.info("收到指令回馈，value:"+value.toString());
+                    logger.info("收到指令回馈，value:" + value.toString());
                     List<String> driverIdLIst = message.getDriverIdList();
-                    if (driverIdLIst.size()!=0) {
+                    if (driverIdLIst.size() != 0) {
                         StringBuilder sb = new StringBuilder();
                         for (String driverId : driverIdLIst) {
                             sb.append(driverId);
@@ -180,7 +180,7 @@ public class HaiKangCommandHandler {
                         }
                         sb.deleteCharAt(sb.length() - 1);
                         siteResponse = sb.toString();
-                    }else {
+                    } else {
                         siteResponse = "设备中没有司机信息";
                     }
                     dtcr.setContent(siteResponse);
@@ -201,7 +201,7 @@ public class HaiKangCommandHandler {
                     Message0x0005 message = (Message0x0005) value;
                     String driverId = message.getDriverID();
                     String fid = "null";
-                    if (driverId!=DeviceTypeConstant.NO_DRIVER_ID) {
+                    if (driverId != DeviceTypeConstant.NO_DRIVER_ID) {
                         byte[] photo = message.getPhoto();
                         if (photo != null) {
                             int check = message.getCheck();
@@ -254,30 +254,30 @@ public class HaiKangCommandHandler {
                         logger.warn("主动验证未收到照片：vehicleId" + vehicleId + ",driverID" + driverId);
                     }
                     String typeStr = "null";
-                    switch (type){
-                        case DeviceTypeConstant.NORMAL_DRIVER:{
-                            typeStr="正常司机";
+                    switch (type) {
+                        case DeviceTypeConstant.NORMAL_DRIVER: {
+                            typeStr = "正常司机";
                             break;
                         }
-                        case DeviceTypeConstant.CHANGE_DRIVER:{
-                            typeStr="更换司机";
+                        case DeviceTypeConstant.CHANGE_DRIVER: {
+                            typeStr = "更换司机";
                             break;
                         }
-                        case DeviceTypeConstant.ILLEGAL_DRIVER:{
-                            typeStr="非法的司机";
+                        case DeviceTypeConstant.ILLEGAL_DRIVER: {
+                            typeStr = "非法的司机";
                             break;
                         }
-                        case DeviceTypeConstant.NO_DRIVER:{
-                            typeStr="无司机";
+                        case DeviceTypeConstant.NO_DRIVER: {
+                            typeStr = "无司机";
                             break;
                         }
-                        default:{
-                            typeStr="未知事件";
+                        default: {
+                            typeStr = "未知事件";
                             break;
                         }
                     }
 
-                    siteResponse = message.getTime()+";"+driverId + ";" + fid + ";" + typeStr;
+                    siteResponse = message.getTime() + ";" + driverId + ";" + fid + ";" + typeStr;
                     dtcr.setContent(siteResponse);
                     int answerMessageID = message.getAnswerMessageID();
                     long dbSeq = baseHandler.getSeqId(answerMessageID);

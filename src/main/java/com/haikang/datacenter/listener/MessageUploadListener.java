@@ -30,20 +30,20 @@ public class MessageUploadListener implements BusListener {
     private static final Logger logger = LoggerFactory.getLogger(MessageUploadListener.class);
 
     @Autowired
-    private HaiKangCommandHandler handler ;
+    private HaiKangCommandHandler handler;
 
     private static BaseInfoFromCohDao cohDao = new BaseInfoFromCohDao();
 
     @Override
     public void commandReceived(Command command, String connectName) {
 
-            DTerminalCommandResponse response = handler.getHKCommandResponse(command);
-            if (response!=null) {
-                logger.info("收到指令回馈，cmd:"+response.getCmdID()+",seq"+response.getSeqID());
-                cohDao.putCoherence(CoherenceTopic.COMMAND_RESPONSE, String.valueOf(response.getSeqID()), response);
-            }else {
-                logger.warn("收到未知消息command:" + command.toString());
-            }
+        DTerminalCommandResponse response = handler.getHKCommandResponse(command);
+        if (response != null) {
+            logger.info("收到指令回馈，cmd:" + response.getCmdID() + ",seq" + response.getSeqID());
+            cohDao.putCoherence(CoherenceTopic.COMMAND_RESPONSE, String.valueOf(response.getSeqID()), response);
+        } else {
+            logger.warn("收到未知消息command:" + command.toString());
+        }
     }
 
     public HaiKangCommandHandler getHandler() {

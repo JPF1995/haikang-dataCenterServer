@@ -17,29 +17,26 @@ import java.util.Map;
  * Description:
  */
 
-public class RawMessageDecoder implements Deserializer<Object>
-{
-    public static Object ByteToObject(byte[] bytes)
-    {
-        try
-        {
+public class RawMessageDecoder implements Deserializer<Object> {
+    public static Object ByteToObject(byte[] bytes) {
+        try {
             return SerializationUtils.deserialize(bytes);
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             System.out.println("收到欧错误");
             return null;
         }
     }
 
     @Override
-    public void configure(Map<String, ?> configs, boolean isKey) {}
+    public void configure(Map<String, ?> configs, boolean isKey) {
+    }
 
     @Override
-    public Object deserialize(String topic, byte[] data)
-    {
+    public Object deserialize(String topic, byte[] data) {
         return ByteToObject(data);
     }
 
     @Override
-    public void close() {}
+    public void close() {
+    }
 }

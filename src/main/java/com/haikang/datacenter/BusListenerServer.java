@@ -1,7 +1,6 @@
 package com.haikang.datacenter;
 
 
-
 import com.haikang.datacenter.bus.BusListener;
 import com.haikang.datacenter.bus.BusManager;
 import com.haikang.datacenter.config.BusListenerConfig;
@@ -36,7 +35,7 @@ public class BusListenerServer {
     @Autowired
     private BusListenerConfig busListenerConfig;
 
-    public boolean init(){
+    public boolean init() {
         logger.info("DataAccessServer begin to init.");
         busListeners = busListenerConfig.getBusListenerConfig();
         // 初始化内部组件监听

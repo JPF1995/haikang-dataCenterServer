@@ -33,8 +33,7 @@ public class CoherenceUtil {
 
     private NamedCache cache = null;
 
-    private CoherenceUtil()
-    {
+    private CoherenceUtil() {
         System.setProperty(propertyKey, propertyValue);
 
     }
@@ -52,17 +51,15 @@ public class CoherenceUtil {
         return QueryHelper.createFilter(cohql, params);
     }
 
-    public Set entrySet(Filter filter)
-    {
+    public Set entrySet(Filter filter) {
         return cache.entrySet(filter);
     }
 
-    public  void put(Object key, Object value) {
+    public void put(Object key, Object value) {
         cache.put(key, value);
     }
 
-    public Object get(Object key)
-    {
+    public Object get(Object key) {
         if (null != util) {
             Object obj = cache.get(key);
             return obj;
@@ -70,8 +67,7 @@ public class CoherenceUtil {
         return null;
     }
 
-    public Map gets(Set key)
-    {
+    public Map gets(Set key) {
         if (null != util) {
             Map obj = cache.getAll(key);
             return obj;

@@ -83,8 +83,8 @@ public class FastDFSCHandler {
         return fid;
     }
 
-    public int insertDriverChange(String vehicleId,String driverId,int type,String fid){
-        int result = fastDao.insertDriverChange( vehicleId, driverId, fid,type);
+    public int insertDriverChange(String vehicleId, String driverId, int type, String fid) {
+        int result = fastDao.insertDriverChange(vehicleId, driverId, fid, type);
         return result;
     }
 }

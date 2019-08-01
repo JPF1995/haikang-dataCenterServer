@@ -40,9 +40,9 @@ public class FastDfsDao {
 
     }
 
-    public synchronized int insertDriverChange(String vehicleId, String driverId, String fid,int type) {
+    public synchronized int insertDriverChange(String vehicleId, String driverId, String fid, int type) {
         // 元数据信息存入数据库
-        Object[] params = new Object[]{vehicleId, driverId,  fid, type};
+        Object[] params = new Object[]{vehicleId, driverId, fid, type};
         int temp = jdbcTemplate.update(driverSql, params);
         if (temp > 0) {
             logger.debug("插入成功！");

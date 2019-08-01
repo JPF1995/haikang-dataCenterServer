@@ -32,8 +32,8 @@ public class Process2002 extends CommandProcess {
         String driverID = param[0];
         String fileId = param[1];
         byte[] photo = FastDFSClient.getFileData(fileId);
-        if (photo==null){
-            logger.info("无法获取照片,fileID:"+fileId);
+        if (photo == null) {
+            logger.info("无法获取照片,fileID:" + fileId);
             return null;
         }
         int photoLength = photo.length;

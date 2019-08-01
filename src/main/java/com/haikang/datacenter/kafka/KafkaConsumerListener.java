@@ -47,11 +47,11 @@ public class KafkaConsumerListener implements MessageListener<String, Object> {
         String sim = record.key();
         Object value = record.value();
         String topic = record.topic();
-        logger.debug("收到一条指令回馈,消息topic："+topic+",sim："+sim);
+        logger.debug("收到一条指令回馈,消息topic：" + topic + ",sim：" + sim);
         Command command = ToolUtil.packageCommand(sim, value, topic);
-        if (KafkaTopic.DEVICE_EVENT_UPLOAD_RECEIVE.equals(topic)){
+        if (KafkaTopic.DEVICE_EVENT_UPLOAD_RECEIVE.equals(topic)) {
             BusManager.sendCommand(BusConnectName.PLATFORMKAFKA, command);
-        }else {
+        } else {
             BusManager.sendCommand(BusConnectName.MESSAGEUPLOAD, command);
         }
     }
@@ -68,14 +68,14 @@ public class KafkaConsumerListener implements MessageListener<String, Object> {
         Object value = record.value();
         SynEntity entity = (SynEntity) value;
 //        logger.info("收到一条指令下发,消息类型("+entity.getDesc()+"),info("+entity.toString()+").");
-        if (entity==null){
+        if (entity == null) {
             return;
         }
         DCommandInfo cmdInfo = (DCommandInfo) entity.getNewValue();
         if (cmdInfo != null) {
             String vehicleId = cmdInfo.getVehicleId();
             String sim = BaseInfoHandler.getInstance().getSimByVehicleId(vehicleId);
-            if (sim==null){
+            if (sim == null) {
                 return;
             }
             Command command = ToolUtil.packageCommand(sim, cmdInfo, null);
@@ -87,14 +87,13 @@ public class KafkaConsumerListener implements MessageListener<String, Object> {
     public void onVehicleMessage(ConsumerRecord<String, Object> record) {
 
         Object data = record.value();
-        SynEntity entity = (SynEntity)data;
-        logger.debug("收到一条车辆信息修改消息,消息类型("+entity.getDesc()+"),info("+entity.toString()+").");
-        if(entity.getType()==SynEntity.DELETE){
-            SVehicleInfo vinfo = (SVehicleInfo)entity.getOldValue();
+        SynEntity entity = (SynEntity) data;
+        logger.debug("收到一条车辆信息修改消息,消息类型(" + entity.getDesc() + "),info(" + entity.toString() + ").");
+        if (entity.getType() == SynEntity.DELETE) {
+            SVehicleInfo vinfo = (SVehicleInfo) entity.getOldValue();
             BaseInfoHandler.getInstance().removeVehicle(vinfo);
-        }
-        else{
-            SVehicleInfo vinfo = (SVehicleInfo)entity.getNewValue();
+        } else {
+            SVehicleInfo vinfo = (SVehicleInfo) entity.getNewValue();
             BaseInfoHandler.getInstance().putVehicleCache(vinfo);
         }
     }

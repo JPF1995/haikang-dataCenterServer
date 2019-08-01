@@ -33,7 +33,7 @@ public class CommandIssuedListener implements BusListener {
     @Autowired
     private KafkaTemplate kafkaTemplate;
     @Autowired
-    private HaiKangCommandHandler handler ;
+    private HaiKangCommandHandler handler;
 
 
     @Override
@@ -44,7 +44,7 @@ public class CommandIssuedListener implements BusListener {
         DCommandInfo cmdInfo = (DCommandInfo) command.getResult();
         long seqId = cmdInfo.getSeqID();
         Command message = handler.prepareHKCommand(cmdInfo, sim, seqId);
-        if (message!=null) {
+        if (message != null) {
             BaseInfoHandler.getInstance().putCommand((CommandMessage) message.getResult());
             logger.debug("Push to kafka:topic(" + message.getSource() + "),sim(" + sim + "),value(" + message.toString() + ")");
             kafkaTemplate.send(message.getSource(), sim, message.getResult());

@@ -37,8 +37,8 @@ public class PlatformKafkaListener implements BusListener {
     public void commandReceived(Command command, String connectName) {
 
 
-       Command message = handler.getKafkaMessage(command);
-        if (message!=null) {
+        Command message = handler.getKafkaMessage(command);
+        if (message != null) {
             String topic = message.getSource();
             String vehicleId = ConvertUtil.getStringValue(message.getParam());
             logger.debug("Push to kafka:topic(" + topic + "),vehicleId(" + vehicleId + "),value(" + message.toString() + ")");

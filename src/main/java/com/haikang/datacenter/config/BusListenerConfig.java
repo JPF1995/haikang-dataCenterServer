@@ -23,7 +23,7 @@ import java.util.Set;
  * Description:
  */
 @Configuration
-@PropertySource(value= "classpath:/busServer.properties")
+@PropertySource(value = "classpath:/busServer.properties")
 @ConfigurationProperties(prefix = "data")
 public class BusListenerConfig {
 
@@ -37,12 +37,12 @@ public class BusListenerConfig {
         this.busListeners = busListeners;
     }
 
-    public Map<String, BusListener> getBusListenerConfig(){
+    public Map<String, BusListener> getBusListenerConfig() {
         Map<String, BusListener> listenerMap = new HashMap<String, BusListener>();
         Set<String> keys = busListeners.keySet();
         for (String key : keys) {
             String value = busListeners.get(key);
-            listenerMap.put(key,(BusListener)SpringUtil.getBean(value));
+            listenerMap.put(key, (BusListener) SpringUtil.getBean(value));
         }
         return listenerMap;
     }

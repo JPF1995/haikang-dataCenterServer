@@ -16,7 +16,7 @@ import com.haikang.common.messagebody.Message0x8005;
  * Description:
  */
 
-public class Process2005 extends CommandProcess{
+public class Process2005 extends CommandProcess {
 
     @Override
     public CommandMessage transformData(String sim, int messageID, String[] param) {

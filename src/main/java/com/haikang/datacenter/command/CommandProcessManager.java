@@ -34,28 +34,28 @@ public enum CommandProcessManager {
     private CommandProcess process;
 
     /**
-     * @Description:构造方法
      * @param :args
      * @return
      * @throws Exception
+     * @Description:构造方法
      */
-     CommandProcessManager(
+    CommandProcessManager(
             CommandProcess process) {
         this.process = process;
     }
 
     /**
-     * @Description:获取解析类
      * @param :args
      * @return
      * @throws Exception
+     * @Description:获取解析类
      */
     @SuppressWarnings("unchecked")
     public static CommandProcess getProcess(
             int cmd) {
         try {
             String cmdStr = ConvertUtil.getStringValue(cmd);
-            String key = "P"+cmdStr;
+            String key = "P" + cmdStr;
             return CommandProcessManager.valueOf(key).process;
         } catch (IllegalArgumentException e) {
             return null;

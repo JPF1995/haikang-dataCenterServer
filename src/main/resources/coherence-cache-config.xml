@@ -1,119 +1,122 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <cache-config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns="http://xmlns.oracle.com/coherence/coherence-cache-config"
-	xsi:schemaLocation="http://xmlns.oracle.com/coherence/coherence-cache-config
+              xmlns="http://xmlns.oracle.com/coherence/coherence-cache-config"
+              xsi:schemaLocation="http://xmlns.oracle.com/coherence/coherence-cache-config
    coherence-cache-config.xsd">
-	<defaults>
-		<serializer></serializer>
-	</defaults>
+    <defaults>
+        <serializer></serializer>
+    </defaults>
 
-	<caching-scheme-mapping>
+    <caching-scheme-mapping>
 
-		<cache-mapping>
-			<cache-name>vms_et_cahce_*</cache-name>
-			<scheme-name>remote</scheme-name>
-		</cache-mapping>
+        <cache-mapping>
+            <cache-name>vms_et_cahce_*</cache-name>
+            <scheme-name>remote</scheme-name>
+        </cache-mapping>
 
-		<cache-mapping>
-			<cache-name>mapGrid2Address</cache-name>
-			<scheme-name>remote</scheme-name>
-		</cache-mapping>
+        <cache-mapping>
+            <cache-name>mapGrid2Address</cache-name>
+            <scheme-name>remote</scheme-name>
+        </cache-mapping>
 
 
-		<cache-mapping>
-			<cache-name>vms_wy_cahce_*</cache-name>
-			<scheme-name>remote</scheme-name>
-		</cache-mapping>
+        <cache-mapping>
+            <cache-name>vms_wy_cahce_*</cache-name>
+            <scheme-name>remote</scheme-name>
+        </cache-mapping>
 
-		<cache-mapping>
-			<cache-name>static-vms-driver</cache-name>
-			<scheme-name>remote</scheme-name>
-		</cache-mapping>
+        <cache-mapping>
+            <cache-name>static-vms-driver</cache-name>
+            <scheme-name>remote</scheme-name>
+        </cache-mapping>
 
-		<cache-mapping>
-			<cache-name>static-vms-vehicleInfo</cache-name>
-			<scheme-name>remote</scheme-name>
-		</cache-mapping>
+        <cache-mapping>
+            <cache-name>static-vms-vehicleInfo</cache-name>
+            <scheme-name>remote</scheme-name>
+        </cache-mapping>
 
-		<cache-mapping>
-			<cache-name>mapVehicle2AlarmInfo</cache-name>
-			<scheme-name>remote</scheme-name>
-		</cache-mapping>
-		<cache-mapping>
-			<cache-name>mapVehicle2Lastlocation</cache-name>
-			<scheme-name>remote</scheme-name>
-		</cache-mapping>
-	
-		<cache-mapping>
-			<cache-name>mapOnOffLine</cache-name>
-			<scheme-name>remote</scheme-name>
-		</cache-mapping>
-		<cache-mapping>
-			<cache-name>mapCommandResponse</cache-name>
-			<scheme-name>remote</scheme-name>
-		</cache-mapping>
-		<cache-mapping>
-			<cache-name>vms_et_cahce_driverResult</cache-name>
-			<scheme-name>remote</scheme-name>
-		</cache-mapping>
+        <cache-mapping>
+            <cache-name>mapVehicle2AlarmInfo</cache-name>
+            <scheme-name>remote</scheme-name>
+        </cache-mapping>
+        <cache-mapping>
+            <cache-name>mapVehicle2Lastlocation</cache-name>
+            <scheme-name>remote</scheme-name>
+        </cache-mapping>
 
-		<cache-mapping>
-			<cache-name>static-vms-terminalInfo</cache-name>
-			<scheme-name>remote</scheme-name>
-		</cache-mapping>
-	
-	</caching-scheme-mapping>
+        <cache-mapping>
+            <cache-name>mapOnOffLine</cache-name>
+            <scheme-name>remote</scheme-name>
+        </cache-mapping>
+        <cache-mapping>
+            <cache-name>mapCommandResponse</cache-name>
+            <scheme-name>remote</scheme-name>
+        </cache-mapping>
+        <cache-mapping>
+            <cache-name>vms_et_cahce_driverResult</cache-name>
+            <scheme-name>remote</scheme-name>
+        </cache-mapping>
 
-	<caching-schemes>
-		<remote-cache-scheme>
-			<scheme-name>remote</scheme-name>
-			<service-name>ExtendTcpCacheService</service-name>
-			<initiator-config>
-				<tcp-initiator>
-					<remote-addresses>
+        <cache-mapping>
+            <cache-name>static-vms-terminalInfo</cache-name>
+            <scheme-name>remote</scheme-name>
+        </cache-mapping>
 
-						<!-- VMS3.0 -->
-						 <socket-address id="1"> <address>192.168.3.117</address> <port>9020</port> 
-							</socket-address> 
+    </caching-scheme-mapping>
 
-					</remote-addresses>
-					<connect-timeout>10s</connect-timeout>
+    <caching-schemes>
+        <remote-cache-scheme>
+            <scheme-name>remote</scheme-name>
+            <service-name>ExtendTcpCacheService</service-name>
+            <initiator-config>
+                <tcp-initiator>
+                    <remote-addresses>
 
-				</tcp-initiator>
-				<outgoing-message-handler>
-					<request-timeout>5s</request-timeout>
-				</outgoing-message-handler>
+                        <!-- VMS3.0 -->
+                        <socket-address id="1">
+                            <address>192.168.3.117</address>
+                            <port>9020</port>
+                        </socket-address>
 
-				<serializer>
-					<instance>
-						<class-name>com.tangosol.io.pof.ConfigurablePofContext
-						</class-name>
-					</instance>
-				</serializer>
+                    </remote-addresses>
+                    <connect-timeout>10s</connect-timeout>
 
-			</initiator-config>
-		</remote-cache-scheme>
+                </tcp-initiator>
+                <outgoing-message-handler>
+                    <request-timeout>5s</request-timeout>
+                </outgoing-message-handler>
 
-		<remote-invocation-scheme>
-			<scheme-name>extend-invocation</scheme-name>
-			<service-name>ExtendTcpInvocationService</service-name>
-			<initiator-config>
-				<tcp-initiator>
-					<remote-addresses>
+                <serializer>
+                    <instance>
+                        <class-name>com.tangosol.io.pof.ConfigurablePofContext
+                        </class-name>
+                    </instance>
+                </serializer>
 
-						<!-- VMS3.0 -->
-						 <socket-address id="1"> 
-						       <address>192.168.3.117</address> <port>9020</port> 
-						 </socket-address> 
-					</remote-addresses>
+            </initiator-config>
+        </remote-cache-scheme>
 
-					<connect-timeout>10s</connect-timeout>
-				</tcp-initiator>
-				<outgoing-message-handler>
-					<request-timeout>5s</request-timeout>
-				</outgoing-message-handler>
-			</initiator-config>
-		</remote-invocation-scheme>
+        <remote-invocation-scheme>
+            <scheme-name>extend-invocation</scheme-name>
+            <service-name>ExtendTcpInvocationService</service-name>
+            <initiator-config>
+                <tcp-initiator>
+                    <remote-addresses>
 
-	</caching-schemes>
+                        <!-- VMS3.0 -->
+                        <socket-address id="1">
+                            <address>192.168.3.117</address>
+                            <port>9020</port>
+                        </socket-address>
+                    </remote-addresses>
+
+                    <connect-timeout>10s</connect-timeout>
+                </tcp-initiator>
+                <outgoing-message-handler>
+                    <request-timeout>5s</request-timeout>
+                </outgoing-message-handler>
+            </initiator-config>
+        </remote-invocation-scheme>
+
+    </caching-schemes>
 </cache-config>

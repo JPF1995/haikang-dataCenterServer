@@ -25,8 +25,7 @@ public class ConvertUtil {
         String res = String.valueOf(obj);
         if (res == "null") {
             return "";
-        }
-        else {
+        } else {
             return res;
         }
     }
@@ -83,7 +82,7 @@ public class ConvertUtil {
         try {
             return Byte.parseByte(getStringValue(obj));
         } catch (NumberFormatException e) {
-            return (byte)(getIntValue(obj));
+            return (byte) (getIntValue(obj));
         }
     }
 
@@ -91,7 +90,7 @@ public class ConvertUtil {
         try {
             return Short.parseShort(getStringValue(obj));
         } catch (NumberFormatException e) {
-            return (short)(getIntValue(obj));
+            return (short) (getIntValue(obj));
         }
     }
 
@@ -159,8 +158,7 @@ public class ConvertUtil {
         asd = getByteValue(255);
     }
 
-    public static byte[] getBCD(Object obj,int len)
-    {
+    public static byte[] getBCD(Object obj, int len) {
         return null;
     }
 
@@ -170,7 +168,7 @@ public class ConvertUtil {
             return null;
         }
         String msg = new String();
-        for (Iterator<T> it2 = vehicle_ids.iterator(); it2.hasNext();) {
+        for (Iterator<T> it2 = vehicle_ids.iterator(); it2.hasNext(); ) {
             msg += (it2.next()).toString() + ",";
         }
 

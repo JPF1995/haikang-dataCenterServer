@@ -3,23 +3,23 @@
 	your custom user- type elements, and place it at the beginning of the class 
 	path. -->
 <pof-config xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
-	xmlns='http://xmlns.oracle.com/coherence/coherence-pof-config'
-	xsi:schemaLocation='http://xmlns.oracle.com/coherence/coherence-pof-config coherence-pof-config.xsd'>
+            xmlns='http://xmlns.oracle.com/coherence/coherence-pof-config'
+            xsi:schemaLocation='http://xmlns.oracle.com/coherence/coherence-pof-config coherence-pof-config.xsd'>
 
-	<user-type-list>
-		<!-- by default just include coherence POF user types -->
-		<include>coherence-pof-config.xml</include>
-		<user-type>
-			<type-id>1002</type-id>
-			<class-name>com.cnpc.vms.coherence.entity.DCommandInfo</class-name>
-		</user-type>
-		<user-type>
-			<type-id>1020</type-id>
-			<class-name>com.cnpc.vms.coherence.entity.SVehicleInfo</class-name>
-		</user-type>
-		<user-type>
-			<type-id>1011</type-id>
-			<class-name>com.cnpc.vms.coherence.entity.DTerminalCommandResponse</class-name>
-		</user-type>
-	</user-type-list>
+    <user-type-list>
+        <!-- by default just include coherence POF user types -->
+        <include>coherence-pof-config.xml</include>
+        <user-type>
+            <type-id>1002</type-id>
+            <class-name>com.cnpc.vms.coherence.entity.DCommandInfo</class-name>
+        </user-type>
+        <user-type>
+            <type-id>1020</type-id>
+            <class-name>com.cnpc.vms.coherence.entity.SVehicleInfo</class-name>
+        </user-type>
+        <user-type>
+            <type-id>1011</type-id>
+            <class-name>com.cnpc.vms.coherence.entity.DTerminalCommandResponse</class-name>
+        </user-type>
+    </user-type-list>
 </pof-config>
